@@ -3,5 +3,8 @@ numpy
 seaborn
 scikit-learn
 catboost
-xgboost 
+xgboost
+dill
+imblearn
+flask
 ## -e .

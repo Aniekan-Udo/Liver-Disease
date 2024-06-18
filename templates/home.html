@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liver Disease Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .login {
+            max-width: 600px;
+            margin: auto;
+        }
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+        }
+        .btn {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .result-message {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login">
+        <h1>Liver Disease Prediction</h1>
+        <form action="{{ url_for('predict_datapoint')}}" method="post">
+            <div class="mb-3">
+                <label class="form-label">Age</label>
+                <input class="form-control" type="number" name="Age" placeholder="Enter your Age" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Gender</label>
+                <select class="form-control" name="Gender" required>
+                    <option class="placeholder" selected disabled value="">Select your Gender</option>
+                    <option value="0">Male</option>
+                    <option value="1">Female</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">BMI</label>
+                <input class="form-control" type="number" step="0.1" name="BMI" placeholder="Enter your BMI" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Alcohol Consumption</label>
+                <input class="form-control" type="number" step="0.1" name="AlcoholConsumption" placeholder="Enter your Weekly Unit of Alcohol Consumption" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Smoking</label>
+                <select class="form-control" name="Smoking" required>
+                    <option class="placeholder" selected disabled value="">Select Smoking Status</option>
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Genetic Risk</label>
+                <select class="form-control" name="GeneticRisk" required>
+                    <option class="placeholder" selected disabled value="">Select Genetic Risk Level</option>
+                    <option value="0">Low</option>
+                    <option value="1">Moderate</option>
+                    <option value="2">High</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Physical Activity</label>
+                <input class="form-control" type="number" step="0.1" name="PhysicalActivity" placeholder="Enter your Weekly hours of Physical Activity" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Diabetes</label>
+                <select class="form-control" name="Diabetes" required>
+                    <option class="placeholder" selected disabled value="">Select Diabetes Status</option>
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Hypertension</label>
+                <select class="form-control" name="Hypertension" required>
+                    <option class="placeholder" selected disabled value="">Select Hypertension Status</option>
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Liver Function Test</label>
+                <input class="form-control" type="number" step="0.1" name="LiverFunctionTest" placeholder="Enter your Liver Function Test" required>
+            </div>
+            <div class="mb-3">
+                <input class="btn btn-primary" type="submit" value="Predict Liver Disease" required>
+            </div>
+        </form>
+        <h2>The prediction is {{results}}</h2>
+        <div class="result-message">
+            {% if results == 0.0 %}
+                You don't have liver disease.
+            {% elif results == 1.0 %}
+                You have liver disease.
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
